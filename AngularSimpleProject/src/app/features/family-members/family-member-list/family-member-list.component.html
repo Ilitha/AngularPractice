@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="list-header">
+    <app-page-header
+      title="Family Members"
+      subtitle="Manage and view your family members"
+    />
+    <a routerLink="/family-members/new" class="btn btn-primary" aria-label="Add new family member">
+      + Add Member
+    </a>
+  </div>
+
+  @if (members().length === 0) {
+    <div class="empty-state" role="status">
+      <p class="empty-icon" aria-hidden="true">👨‍👩‍👧‍👦</p>
+      <p>No family members yet. Start by adding your first family member.</p>
+      <a routerLink="/family-members/new" class="btn btn-primary">Add Family Member</a>
+    </div>
+  } @else {
+    <div class="table-wrapper" role="region" aria-label="Family members list">
+      <table class="members-table" aria-label="Family members">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Clan</th>
+            <th scope="col">Birth Date</th>
+            <th scope="col">Death Date</th>
+            <th scope="col">Location</th>
+            <th scope="col"><span class="sr-only">Actions</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (member of members(); track member.id) {
+            <tr>
+              <td>
+                <span class="member-name">
+                  {{ member.firstName }} {{ member.middleName ? member.middleName + ' ' : '' }}{{ member.lastName }}
+                </span>
+                @if (member.maidenName) {
+                  <span class="maiden-name">(née {{ member.maidenName }})</span>
+                }
+              </td>
+              <td>{{ getClanName(member.clanId) }}</td>
+              <td>{{ member.birthDate || '—' }}</td>
+              <td>{{ member.deathDate || '—' }}</td>
+              <td>{{ member.currentLocation || member.placeOfBirth || '—' }}</td>
+              <td class="actions-cell">
+                <a
+                  [routerLink]="['/family-members', member.id, 'edit']"
+                  class="btn btn-outline btn-sm"
+                  [attr.aria-label]="'Edit ' + member.firstName + ' ' + member.lastName"
+                >Edit</a>
+                <button
+                  type="button"
+                  class="btn btn-danger btn-sm"
+                  (click)="deleteMember(member.id)"
+                  [attr.aria-label]="'Delete ' + member.firstName + ' ' + member.lastName"
+                >Delete</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

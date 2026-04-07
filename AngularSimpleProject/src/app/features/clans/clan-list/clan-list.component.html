@@ -1,0 +1,73 @@
+<div class="container">
+  <div class="list-header">
+    <app-page-header
+      title="Clans"
+      subtitle="Manage and view your family clans"
+    />
+    <a routerLink="/clans/new" class="btn btn-primary" aria-label="Add new clan">
+      + Add Clan
+    </a>
+  </div>
+
+  @if (clans().length === 0) {
+    <div class="empty-state" role="status">
+      <p class="empty-icon" aria-hidden="true">🏡</p>
+      <p>No clans yet. Start by creating your first clan.</p>
+      <a routerLink="/clans/new" class="btn btn-primary">Add Clan</a>
+    </div>
+  } @else {
+    <div class="clans-grid" role="list" aria-label="Clans list">
+      @for (clan of clans(); track clan.id) {
+        <article class="clan-card" role="listitem" aria-labelledby="clan-name-{{ clan.id }}">
+          <div class="clan-card-header">
+            <h2 id="clan-name-{{ clan.id }}" class="clan-name">{{ clan.name }}</h2>
+            <div class="clan-actions">
+              <a
+                [routerLink]="['/clans', clan.id, 'edit']"
+                class="btn btn-outline btn-sm"
+                [attr.aria-label]="'Edit clan ' + clan.name"
+              >Edit</a>
+              <button
+                type="button"
+                class="btn btn-danger btn-sm"
+                (click)="deleteClan(clan.id)"
+                [attr.aria-label]="'Delete clan ' + clan.name"
+              >Delete</button>
+            </div>
+          </div>
+
+          @if (clan.description) {
+            <p class="clan-description">{{ clan.description }}</p>
+          }
+
+          <dl class="clan-details">
+            @if (clan.originRegion) {
+              <div class="detail-row">
+                <dt>Origin Region</dt>
+                <dd>{{ clan.originRegion }}</dd>
+              </div>
+            }
+            @if (clan.surnames.length > 0) {
+              <div class="detail-row">
+                <dt>Surnames</dt>
+                <dd>{{ clan.surnames.join(', ') }}</dd>
+              </div>
+            }
+            @if (clan.traditions.length > 0) {
+              <div class="detail-row">
+                <dt>Traditions</dt>
+                <dd>{{ clan.traditions.join(', ') }}</dd>
+              </div>
+            }
+          </dl>
+
+          @if (clan.notes) {
+            <p class="clan-notes">
+              <strong>Notes:</strong> {{ clan.notes }}
+            </p>
+          }
+        </article>
+      }
+    </div>
+  }
+</div>

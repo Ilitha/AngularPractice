@@ -1,0 +1,184 @@
+<div class="container">
+  <app-page-header [title]="pageTitle()" />
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate aria-label="Family member form">
+    <fieldset class="form-fieldset">
+      <legend>Personal Information</legend>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">
+            First Name
+            <span class="required-mark" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="firstName"
+            type="text"
+            formControlName="firstName"
+            aria-required="true"
+            [attr.aria-invalid]="isFieldInvalid('firstName')"
+            [attr.aria-describedby]="isFieldInvalid('firstName') ? 'firstName-error' : null"
+            [class.invalid]="isFieldInvalid('firstName')"
+            autocomplete="given-name"
+          />
+          @if (isFieldInvalid('firstName')) {
+            <span id="firstName-error" class="field-error" role="alert">
+              {{ getFieldError('firstName') }}
+            </span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="middleName">Middle Name</label>
+          <input
+            id="middleName"
+            type="text"
+            formControlName="middleName"
+            autocomplete="additional-name"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="lastName">
+            Last Name
+            <span class="required-mark" aria-hidden="true">*</span>
+          </label>
+          <input
+            id="lastName"
+            type="text"
+            formControlName="lastName"
+            aria-required="true"
+            [attr.aria-invalid]="isFieldInvalid('lastName')"
+            [attr.aria-describedby]="isFieldInvalid('lastName') ? 'lastName-error' : null"
+            [class.invalid]="isFieldInvalid('lastName')"
+            autocomplete="family-name"
+          />
+          @if (isFieldInvalid('lastName')) {
+            <span id="lastName-error" class="field-error" role="alert">
+              {{ getFieldError('lastName') }}
+            </span>
+          }
+        </div>
+
+        <div class="form-group">
+          <label for="maidenName">Maiden Name</label>
+          <input
+            id="maidenName"
+            type="text"
+            formControlName="maidenName"
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select id="gender" formControlName="gender">
+            <option value="">Select gender</option>
+            @for (option of genderOptions; track option.value) {
+              <option [value]="option.value">{{ option.label }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="clanId">Clan</label>
+          <select id="clanId" formControlName="clanId">
+            <option value="">Select clan</option>
+            @for (clan of clans(); track clan.id) {
+              <option [value]="clan.id">{{ clan.name }}</option>
+            }
+          </select>
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-fieldset">
+      <legend>Dates &amp; Locations</legend>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="birthDate">Birth Date</label>
+          <input
+            id="birthDate"
+            type="date"
+            formControlName="birthDate"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="deathDate">Death Date</label>
+          <input
+            id="deathDate"
+            type="date"
+            formControlName="deathDate"
+          />
+          <span class="field-hint">Leave blank if still living</span>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="placeOfBirth">Place of Birth</label>
+          <input
+            id="placeOfBirth"
+            type="text"
+            formControlName="placeOfBirth"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="currentLocation">Current Location</label>
+          <input
+            id="currentLocation"
+            type="text"
+            formControlName="currentLocation"
+          />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-fieldset">
+      <legend>Additional Information</legend>
+
+      <div class="form-group">
+        <label for="biography">Biography</label>
+        <textarea
+          id="biography"
+          formControlName="biography"
+          rows="4"
+          placeholder="Write a brief biography..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="photoUrl">Photo URL</label>
+        <input
+          id="photoUrl"
+          type="url"
+          formControlName="photoUrl"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea
+          id="notes"
+          formControlName="notes"
+          rows="3"
+          placeholder="Any additional notes..."
+        ></textarea>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary">
+        {{ isEditMode() ? 'Update Member' : 'Add Member' }}
+      </button>
+    </div>
+  </form>
+</div>
