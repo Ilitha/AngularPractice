@@ -1,0 +1,114 @@
+.list-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--color-border);
+  color: var(--color-text-muted);
+
+  .empty-icon {
+    font-size: 3rem;
+    margin: 0 0 1rem;
+  }
+
+  p {
+    font-size: 1.0625rem;
+    margin: 0 0 1.5rem;
+  }
+}
+
+.clans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.clan-card {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: box-shadow 0.2s;
+
+  &:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  .clan-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .clan-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-primary);
+  }
+
+  .clan-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .clan-description {
+    margin: 0;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    font-size: 0.9375rem;
+  }
+
+  .clan-details {
+    margin: 0;
+    padding: 0.75rem;
+    background: #f8faf9;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+
+    .detail-row {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.9375rem;
+
+      dt {
+        font-weight: 600;
+        color: var(--color-primary);
+        min-width: 110px;
+      }
+
+      dd {
+        margin: 0;
+        color: var(--color-text-muted);
+      }
+    }
+  }
+
+  .clan-notes {
+    margin: 0;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+}
+
+.btn-sm {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+}

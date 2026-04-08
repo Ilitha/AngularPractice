@@ -1,0 +1,55 @@
+<section class="hero" aria-labelledby="hero-heading">
+  <div class="hero-content">
+    <h1 id="hero-heading">Preserve Your Family Heritage</h1>
+    <p class="hero-subtitle">
+      Document your family tree, record ancestral stories, and connect generations through meaningful heritage data.
+    </p>
+    <div class="hero-actions">
+      <a routerLink="/family-members/new" class="btn btn-primary">Add Family Member</a>
+      <a routerLink="/clans/new" class="btn btn-secondary">Create a Clan</a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <section class="stats-section" aria-label="Heritage summary">
+    <div class="stat-card">
+      <span class="stat-number" [attr.aria-label]="memberCount().length + ' family members recorded'">{{ memberCount().length }}</span>
+      <span class="stat-label">Family Members</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-number" [attr.aria-label]="clanCount().length + ' clans recorded'">{{ clanCount().length }}</span>
+      <span class="stat-label">Clans</span>
+    </div>
+  </section>
+
+  <section class="features-section" aria-labelledby="features-heading">
+    <h2 id="features-heading">Manage Your Heritage</h2>
+    <div class="feature-cards">
+      <article class="feature-card" aria-labelledby="family-tree-heading">
+        <div class="feature-icon" aria-hidden="true">👨‍👩‍👧‍👦</div>
+        <h3 id="family-tree-heading">Family Members</h3>
+        <p>Add, view, and manage your family members. Record biographical details, relationships, and personal stories.</p>
+        <a routerLink="/family-members" class="btn btn-outline">View Family Members</a>
+      </article>
+      <article class="feature-card" aria-labelledby="clans-heading">
+        <div class="feature-icon" aria-hidden="true">🏡</div>
+        <h3 id="clans-heading">Clans</h3>
+        <p>Manage clan groups that unite multiple family branches under a shared ancestral or cultural identity.</p>
+        <a routerLink="/clans" class="btn btn-outline">View Clans</a>
+      </article>
+    </div>
+  </section>
+
+  <section class="coming-soon-section" aria-labelledby="coming-soon-heading">
+    <h2 id="coming-soon-heading">Coming Soon</h2>
+    <ul class="coming-soon-list" role="list">
+      <li>📸 Photo Albums &amp; Document Uploads</li>
+      <li>🗺️ Ancestral Villages &amp; Origin Maps</li>
+      <li>📖 Family Stories &amp; Oral History</li>
+      <li>🌳 Interactive Family Tree Visualization</li>
+      <li>🔍 Search, Filter &amp; Lineage Exploration</li>
+      <li>🔐 User Accounts &amp; Private Heritage Vaults</li>
+    </ul>
+  </section>
+</div>

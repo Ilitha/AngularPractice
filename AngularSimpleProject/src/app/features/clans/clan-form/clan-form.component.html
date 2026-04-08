@@ -1,0 +1,101 @@
+<div class="container">
+  <app-page-header [title]="pageTitle()" />
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate aria-label="Clan form">
+    <fieldset class="form-fieldset">
+      <legend>Clan Information</legend>
+
+      <div class="form-group">
+        <label for="name">
+          Clan Name
+          <span class="required-mark" aria-hidden="true">*</span>
+        </label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          aria-required="true"
+          [attr.aria-invalid]="isFieldInvalid('name')"
+          [attr.aria-describedby]="isFieldInvalid('name') ? 'name-error' : null"
+          [class.invalid]="isFieldInvalid('name')"
+        />
+        @if (isFieldInvalid('name')) {
+          <span id="name-error" class="field-error" role="alert">
+            {{ getFieldError('name') }}
+          </span>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          rows="3"
+          placeholder="Describe the clan's history and significance..."
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="originRegion">Origin Region</label>
+        <input
+          id="originRegion"
+          type="text"
+          formControlName="originRegion"
+          placeholder="e.g., KwaZulu-Natal, South Africa"
+        />
+      </div>
+    </fieldset>
+
+    <fieldset class="form-fieldset">
+      <legend>Cultural Details</legend>
+
+      <div class="form-group">
+        <label for="surnames">
+          Associated Surnames
+          <span class="field-hint">Enter surnames separated by commas</span>
+        </label>
+        <input
+          id="surnames"
+          type="text"
+          formControlName="surnames"
+          placeholder="e.g., Dlamini, Zulu, Ngcobo"
+          aria-describedby="surnames-hint"
+        />
+        <span id="surnames-hint" class="field-hint">Separate multiple surnames with commas</span>
+      </div>
+
+      <div class="form-group">
+        <label for="traditions">
+          Cultural Traditions
+          <span class="field-hint">Enter traditions separated by commas</span>
+        </label>
+        <input
+          id="traditions"
+          type="text"
+          formControlName="traditions"
+          placeholder="e.g., Ukubuyisa, Umabo"
+          aria-describedby="traditions-hint"
+        />
+        <span id="traditions-hint" class="field-hint">Separate multiple traditions with commas</span>
+      </div>
+
+      <div class="form-group">
+        <label for="notes">Notes</label>
+        <textarea
+          id="notes"
+          formControlName="notes"
+          rows="3"
+          placeholder="Any additional notes about the clan..."
+        ></textarea>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="button" class="btn btn-outline" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-primary">
+        {{ isEditMode() ? 'Update Clan' : 'Add Clan' }}
+      </button>
+    </div>
+  </form>
+</div>
